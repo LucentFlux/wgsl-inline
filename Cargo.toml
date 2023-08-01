@@ -1,6 +1,6 @@
 [package]
 name = "wgsl-inline"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 description = "A macro used to embed WGSL within Rust."
@@ -9,7 +9,7 @@ repository = "https://github.com/LucentFlux/wgsl-inline"
 readme = "README.md"
 keywords = ["gamedev", "graphics", "wgsl", "wgpu", "shader"]
 categories = ["game-development", "graphics"]
-include = ["/Cargo.toml", "/LICENSE", "/README.md", "/src/**"]
+include = ["/Cargo.toml", "/LICENSE", "/README.md", "/src/**", "/docs/**"]
 
 [dependencies]
 syn = { version = "1.0", features = ["full"] }
