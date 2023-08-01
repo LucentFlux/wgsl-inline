@@ -45,7 +45,7 @@ fn main() {
 
 Error scopes are propogated to the token in the macro that caused the error. That is to say, your IDE should be able to tell you exactly which bit of the shader code isn't valid, without ever leaving Rust! For example, my IDE shows me something like the following:
 
-![Image of a WGSL compile error in an IDE](docs/images/compile_error.png)
+![Image of a WGSL compile error in an IDE](https://raw.githubusercontent.com/LucentFlux/wgsl-inline/main/docs/images/compile_error.png)
 
 # Minification
 
