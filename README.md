@@ -41,6 +41,12 @@ fn main() {
 }
 ```
 
+# Error Checking
+
+Error scopes are propogated to the token in the macro that caused the error. That is to say, your IDE should be able to tell you exactly which bit of the shader code isn't valid, without ever leaving Rust! For example, my IDE shows me something like the following:
+
+![Image of a WGSL compile error in an IDE](docs/images/compile_error.png)
+
 # Minification
 
 This crate comes with a "minification" feature flag `minify`. When enabled, all of your included shader source code will be reduced in size at compile time (removing variable names and excess whitespace). This is intended to be used on release builds, stripping debug information to increase shader parsing startup time and decrease read latency.
