@@ -1,5 +1,6 @@
 # WGSL Inline
-Joining your WGSL and Rust files.
+![crates.io](https://img.shields.io/crates/v/wgsl-inline.svg)
+![Crates.io](https://img.shields.io/crates/l/wgsl-inline)
 
 WGSL Inline adds a macro, `wgsl!`, which takes WGSL sourcecode and validates it, reporting any errors to the Rust compiler. 
 
