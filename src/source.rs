@@ -105,6 +105,9 @@ fn should_add_space_between(last: char, next: char) -> bool {
     if last == '-' && next == '>' {
         return false; // Might be a function return like `->`
     }
+    if non_identifier_char(last) && next == '=' {
+        return false; // Might be a comparison like `>=`, `!=` or `==`
+    }
     if last == next && non_identifier_char(next) {
         return false; // Might be a double operator like `++`
     }
@@ -242,8 +245,13 @@ impl Sourcecode {
                     e_base = e;
                 }
 
-                for (loc, _) in e.labels() {
-                    self.push_naga_error(loc, message.clone());
+                let labels = e.labels();
+                if labels.len() == 0 {
+                    self.push_naga_error(naga::Span::new(0, u32::MAX), message.clone());
+                } else {
+                    for (loc, label) in labels {
+                        self.push_naga_error(loc, format!("at {}: {}", label, message));
+                    }
                 }
 
                 None
@@ -365,9 +373,5 @@ impl Sourcecode {
 
     pub(crate) fn errors(&self) -> impl Iterator<Item = &(String, Vec<proc_macro::Span>)> {
         self.errors.iter()
-    }
-
-    pub(crate) fn src(&self) -> &str {
-        &self.src
     }
 }
