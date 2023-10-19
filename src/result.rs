@@ -61,7 +61,12 @@ impl ShaderResult {
             }
         }
 
-        let mut module_items = naga_to_tokenstream::ModuleToTokens::to_items(&self.module);
+        let mut module_items = naga_to_tokenstream::ModuleToTokens::to_items(
+            &self.module,
+            naga_to_tokenstream::ModuleToTokensConfig {
+                structs_filter: None,
+            },
+        );
         items.append(&mut module_items);
 
         items
