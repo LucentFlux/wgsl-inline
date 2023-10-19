@@ -1,5 +1,6 @@
 # WGSL Inline
 [![crates.io](https://img.shields.io/crates/v/wgsl-inline.svg)](https://crates.io/crates/wgsl-inline)
+[![docs.rs](https://img.shields.io/docsrs/wgsl-inline)](https://docs.rs/wgsl-inline/latest/wgsl-inline/)
 [![crates.io](https://img.shields.io/crates/l/wgsl-inline.svg)](https://github.com/LucentFlux/wgsl-inline/blob/main/LICENSE)
 
 WGSL Inline adds a macro, `wgsl!`, which takes WGSL sourcecode and validates it, reporting any errors to the Rust compiler. 
