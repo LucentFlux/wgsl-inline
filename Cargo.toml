@@ -1,6 +1,6 @@
 [package]
 name = "wgsl-inline"
-version = "0.1.5"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 description = "A macro used to embed WGSL within Rust."
@@ -12,11 +12,14 @@ categories = ["game-development", "graphics"]
 include = ["/Cargo.toml", "/LICENSE", "/README.md", "/src/**"]
 
 [dependencies]
-syn = { version = "2.0", features = ["full"] }
+syn = { version = "2.0", features = [] }
 naga = { version = "0.14", features = ["wgsl-in", "wgsl-out"] }
 naga-to-tokenstream = "0.4"
 proc-macro2 = "1.0"
 quote = "1.0"
+
+[dev-dependencies]
+encase = "0.6"
 
 [lib]
 proc-macro = true
