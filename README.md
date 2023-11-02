@@ -10,7 +10,7 @@ WGSL Inline adds a macro, `wgsl!`, which takes WGSL sourcecode and validates it,
 In your `Cargo.toml`:
 
 ```toml
-wgsl-inline = "0.1"
+wgsl-inline = "0.2"
 ```
 
 Then in your Rust source:
