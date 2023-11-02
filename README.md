@@ -54,5 +54,5 @@ Error scopes are propogated to the token in the macro that caused the error. Tha
 This crate comes with a "minification" feature flag `minify`. When enabled, all of your included shader source code will be reduced in size at compile time (removing variable names and excess whitespace). This is intended to be used on release builds, stripping debug information to increase shader parsing startup time and decrease read latency.
 
 ```toml
-wgsl-inline = { version = "0.1", features = ["minify"] }
+wgsl-inline = { version = "0.2", features = ["minify"] }
 ```
