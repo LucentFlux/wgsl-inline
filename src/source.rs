@@ -92,12 +92,39 @@ struct SpanInString {
 
 /// Returns true only if the given character cannot be in an identifier. Returning false gives no information.
 fn non_identifier_char(c: char) -> bool {
-    match c {
-        '(' | ')' | '{' | '}' | '[' | ']' | '<' | '>' | ',' | '+' | '*' | '/' | '!' | '\\'
-        | '"' | '\'' | '|' | '=' | '^' | '&' | ';' | ':' | '?' | '%' | '@' | '#' | '~' | '.'
-        | '£' | '$' | '`' => true,
-        _ => false,
-    }
+    matches!(
+        c,
+        '(' | ')'
+            | '{'
+            | '}'
+            | '['
+            | ']'
+            | '<'
+            | '>'
+            | ','
+            | '+'
+            | '*'
+            | '/'
+            | '!'
+            | '\\'
+            | '"'
+            | '\''
+            | '|'
+            | '='
+            | '^'
+            | '&'
+            | ';'
+            | ':'
+            | '?'
+            | '%'
+            | '@'
+            | '#'
+            | '~'
+            | '.'
+            | '£'
+            | '$'
+            | '`'
+    )
 }
 
 /// Returns true if the two tokens should be separated by a space within wgsl source code.
@@ -114,7 +141,7 @@ fn should_add_space_between(last: char, next: char) -> bool {
     if last == ':' || next == ':' {
         return false; // Might be an import path like `a::b`
     }
-    return true;
+    true
 }
 
 /// Shader sourcecode generated from the token stream provided
@@ -220,7 +247,7 @@ impl Sourcecode {
 
         self.spans[span_start..span_end]
             .iter()
-            .map(|span| span.token_span.clone())
+            .map(|span| span.token_span)
             .collect()
     }
 
@@ -228,7 +255,7 @@ impl Sourcecode {
         let error_spans = if let Some(loc) = loc.to_range() {
             self.get_spans_within(loc.start, loc.end)
         } else {
-            self.spans.iter().map(|s| s.token_span.clone()).collect()
+            self.spans.iter().map(|s| s.token_span).collect()
         };
 
         self.errors.push((msg, error_spans))
@@ -366,7 +393,7 @@ impl Sourcecode {
     }*/
 
     pub(crate) fn complete(mut self) -> ShaderResult {
-        let module = self.parse().unwrap_or(naga::Module::default());
+        let module = self.parse().unwrap_or_default();
 
         ShaderResult::new(self, module)
     }

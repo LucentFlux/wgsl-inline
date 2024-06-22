@@ -33,7 +33,7 @@ impl ShaderResult {
                 } else {
                     for (loc, extra) in e.spans() {
                         self.source
-                            .push_naga_error(loc.clone(), format!("{}: {}", message, extra))
+                            .push_naga_error(*loc, format!("{}: {}", message, extra))
                     }
                 }
 
@@ -42,19 +42,19 @@ impl ShaderResult {
         }
     }
 
-    pub(crate) fn to_items(&mut self) -> Vec<syn::Item> {
+    pub(crate) fn to_items(&self) -> Vec<syn::Item> {
         let mut items = Vec::new();
 
         // Errors
         for (msg, spans) in self.source.errors() {
             for span in spans {
-                let span = span.clone().into();
+                let span = (*span).into();
                 items.push(syn::parse_quote_spanned! {span=>
                     compile_error!(#msg);
                 });
             }
             // If an error doesn't have a location, just report it everywhere
-            if spans.len() == 0 {
+            if spans.is_empty() {
                 items.push(syn::parse_quote! {
                     compile_error!(#msg);
                 });
@@ -65,6 +65,9 @@ impl ShaderResult {
             &self.module,
             naga_to_tokenstream::ModuleToTokensConfig {
                 structs_filter: None,
+                gen_encase: cfg!(feature = "encase"),
+                gen_naga: cfg!(feature = "naga"),
+                gen_glam: cfg!(feature = "glam"),
             },
         );
         items.append(&mut module_items);

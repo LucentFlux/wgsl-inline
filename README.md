@@ -5,6 +5,8 @@
 
 WGSL Inline adds a macro, `wgsl!`, which takes WGSL sourcecode and validates it, reporting any errors to the Rust compiler. 
 
+Note that this crate is intended for small shaders - if you have a large program, with many shaders, you may prefer the [include-wgsl-oil](https://crates.io/crates/include-wgsl-oil) crate, which allows shaders to import other shader files using the `naga-oil` preprocessor.
+
 # Example
 
 In your `Cargo.toml`:
@@ -48,6 +50,11 @@ fn main() {
 Error scopes are propogated to the token in the macro that caused the error. That is to say, your IDE should be able to tell you exactly which bit of the shader code isn't valid, without ever leaving Rust! For example, my IDE shows me something like the following:
 
 ![Image of a WGSL compile error in an IDE](https://raw.githubusercontent.com/LucentFlux/wgsl-inline/main/docs/images/compile_error.png)
+
+# Exported items
+
+This crate uses `naga-to-tokenstream` to extract information other than just the shader source into your Rust program. For a full list of the generated items, 
+see [naga-to-tokenstream](https://crates.io/crates/naga-to-tokenstream). The `encase`, `glam` and `naga` features of the `naga-to-tokenstream` crate can be enabled using feature flags of the same name on this crate.
 
 # Minification
 
