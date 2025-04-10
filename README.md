@@ -1,6 +1,6 @@
 # ⚠️ DEPRECATED ⚠️
 
-Please use my other crate, [include-wgsl-oil](https://crates.io/crates/include-wgsl-oil), instead which is more featureful and is (more) actively maintained.
+Please use my other crate instead, [include-wgsl-oil](https://crates.io/crates/include-wgsl-oil), which is more featureful and is (more) actively maintained.
 
 # WGSL Inline
 [![crates.io](https://img.shields.io/crates/v/wgsl-inline.svg)](https://crates.io/crates/wgsl-inline)
